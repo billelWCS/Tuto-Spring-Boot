@@ -19,29 +19,29 @@ public class ClientController {
     @Autowired
     ClientService clientService;
 
-//    @GetMapping(value = "/")
-//    public ResponseEntity<List<Client>> getAllClients(){
-//        return new ResponseEntity<List<Client>>(
-//                clientService.get(),
-//                HttpStatus.OK
-//        );
-//    }
+    @GetMapping(value = "/")
+    public ResponseEntity<List<Client>> getAllClients(){
+        return new ResponseEntity<List<Client>>(
+                clientService.getAllClients(),
+                HttpStatus.OK
+        );
+    }
 
-//    @GetMapping(value = "{id}")
-//    public ResponseEntity<?> getClientById(@PathVariable Long id){
-//        Optional<Client> client = clientRepo.findById(id);
-//        Map<String, String> body = new HashMap<>();
-//        if (client.isPresent())
-//            return new ResponseEntity<>(
-//                    client.get(),
-//                    HttpStatus.OK
-//            );
-//            body.put("message", "Client not found");
-//            return new ResponseEntity<>(
-//                    body,
-//                    HttpStatus.NOT_FOUND
-//            );
-//    }
+    @GetMapping(value = "{id}")
+    public ResponseEntity<?> getClientById(@PathVariable Long id){
+        Optional<Client> client = clientService.getClientById(id);
+        Map<String, String> body = new HashMap<>();
+        if (client.isPresent())
+            return new ResponseEntity<>(
+                    client.get(),
+                    HttpStatus.OK
+            );
+            body.put("message", "Client not found");
+            return new ResponseEntity<>(
+                    body,
+                    HttpStatus.NOT_FOUND
+            );
+    }
 
     @PostMapping(value = "/")
     public ResponseEntity<Client> createClient(@RequestBody Client client){
